@@ -21,15 +21,15 @@ free: false
 ゼロ知識証明を書くための[基本的なデータタイプ及び専用の計算や条件分岐関数](https://docs.minaprotocol.com/zkapps/o1js/basic-concepts)です。これを利用して書かれたロジックは、実行の保証がされた状態になります。逆にいうとこれを通さない普通のコードは証明されません。
 
 
-## Gadeget
+### Gadeget
 
 ビット演算や公開鍵暗号など、汎用的かつ比較的高レベルな機能を実現するクラス・関数群です。
 
-## ZKApps
+### ZKApps
 
 Mina Protocolとは独立したゼロ知識証明アプリケーションを書くためのフレームワークです。証明のための鍵と証明をそれぞれ生成することが可能で、再帰的ゼロ知識証明を書くことができます。
 
-## Markle Tree等の基礎関数群
+### Markle Tree等の基礎関数群
 
 何かの一部に含まれていることを証明するための[Markle Tree](https://gaiax-blockchain.com/merkle-tree)やゼロ知識証明と計算量的に相性のいいPoseidon Hash、有限体を表現するForien Field、群を表現するgroupといった理論的な部分をアプリケーションや追加のライブラリに実装する際に使われるクラスや関数があり、上述のGagdetや[サードパーティのライブラリ](https://github.com/o1-labs/o1js?tab=readme-ov-file#community-packages)に使われています。
 
@@ -54,14 +54,15 @@ Protokitの中核部分です。Runtimeを繋げた証明のグラフ(ネット�
 ユーザーのような外部の入力とProtokit内部のロジックを結びつける部分です。入力に基づいてprotocolを呼び出し、必要に応じて並列実行や競合状態の解決、状態保存を行い、Mina Protocolに書き込む一連の流れを受け持ちます。
 
 公式サイトトップにある初期化コマンドで生成された状態ではSequencerはGraphQLのAPIを持っている状態になっており、同梱されている
-[caddy](https://caddyserver.com/docs/automatic-https)とまとめてDockerでサーバーにデプロイすることでSSLの下で配信されるAPIが構築できるようになっています
+[caddy](https://caddyserver.com/docs/automatic-https)とまとめてDockerでサーバーにデプロイすることでSSLの下で配信されるAPIが構築できるようになっています。
 
 ## Orochi Network
 
-・最近協業が発表された
-・ゼロ知識証明がついたデータベース
-・O1js的にはLocal State
-・証明可能な乱数や、ゼロ知識で証明されたメモリも提供
+　[Orochi Network](https://www.orochi.network)は最近[Mina Protocolとの提携が発表された](https://x.com/MinaProtocol/status/1869759614868410619?mx=2)チーム^[公式サイトを調べた限りでは企業なのか財団やNPOなのか解りませんでした]です。ゼロ知識証明を中心に暗号系技術を提供しており、その中の[zkDatabase](https://www.zkdatabase.org)が現在Mina Protocolと密接に結びついているプロダクトになります。
+
+この本の最初に述べた通り、Mina Protoclはスマートコントラクトをオフチェーンで実行するという特性を持ちます。この特性にはデメリットとして、スマートコントラクト上に記録されたデータを全て読み込んでしまうのでデータ量に制限があり、トークンの実装のようなオンチェーンでそれなりに大きなデータを蓄積するユースケースが難しくなります。
+
+この問題を解決するのがzkDatabaeです。公式サイトのトップにあるデモの通り、データを書き込むとトランザクションを証明するマークルツリーとハッシュが出力され、これを元に検証することで内容を保証することができます。アクセス制限などの機能も持っていて、実用性は十分だと感じました。
 
 ##　Mina Playground
 
